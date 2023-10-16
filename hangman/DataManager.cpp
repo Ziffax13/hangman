@@ -4,13 +4,25 @@
 
 using namespace std;
 
+int DataManager::getNumberOfWords()
+{
+	string line;
+	ifstream in("words.txt");
+	int numberOfWords = 0;
+	while (getline(in, line))
+	{
+		numberOfWords++;
+	}
+	in.close();
+	return numberOfWords;
+}
+
 string DataManager::getWord()
 {
 	{
-		srand(time(NULL));
-		int choice = rand() % 140;
 		string line;
 		ifstream in("words.txt");
+		int choice = rand() % getNumberOfWords();
 		if (in.is_open())
 		{
 			for (int i = 0; i < choice; i++)
