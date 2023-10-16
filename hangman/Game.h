@@ -1,11 +1,11 @@
 #pragma once
 #include <iostream>
+#include <vector>
 #include "DataManager.h"
 
 class Game
 {
-    int guessCount = 0;
-    char playerLetters[50];
+    std::vector<char>playerLetters;
     std::string guessed;
     int errorCount = 0;
     char guess;
