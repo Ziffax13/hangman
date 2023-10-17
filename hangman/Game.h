@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <vector>
-#include "DataManager.h"
+#include "FileManager.h"
 
 class Game
 {
@@ -14,7 +14,15 @@ class Game
 public:
 	void drawStage();
 	void chooseWord();
-	void start();
+	void play();
+	void inputPlayerGuess();
 	void prepare();
+	void showAttempts();
+	void showGuessed();
+	bool checkEnded();
+	bool checkSameLetter();
+	void showGameWord();
+	bool askAgain();
+	void checkCorrect();
 };
 

@@ -1,10 +1,10 @@
-#include "DataManager.h"
+#include "FileManager.h"
 #include <fstream>
 #include <string>
 
 using namespace std;
 
-int DataManager::getNumberOfWords()
+int FileManager::getNumberOfWords()
 {
 	string line;
 	ifstream in("words.txt");
@@ -17,7 +17,7 @@ int DataManager::getNumberOfWords()
 	return numberOfWords;
 }
 
-string DataManager::getWord()
+string FileManager::getWord()
 {
 	{
 		string line;
@@ -32,11 +32,11 @@ string DataManager::getWord()
 			}
 		}
 		in.close();
-		return decipher(line, 15);
+		return decrypt(line, 15);
 	}
 }
 
-std::string DataManager::decipher(string data, int key)
+std::string FileManager::decrypt(string data, int key)
 {
 	for (int i = 0; i < data.length(); i++)
 	{
@@ -44,3 +44,6 @@ std::string DataManager::decipher(string data, int key)
 	}
 	return data;
 }
+
+
+

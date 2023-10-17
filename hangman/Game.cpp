@@ -102,11 +102,12 @@ void Game::drawStage()
     default:
         break;
     }
+    cout << endl;
 }
 
 void Game::chooseWord()
 {
-    word = DataManager::getWord();
+    word = FileManager::getWord();
     guessed = word;
     for (int i = 0; i < word.length(); i++)
     {
@@ -114,89 +115,39 @@ void Game::chooseWord()
     }
 }
 
-void Game::start()
+void Game::play()
 {
     prepare();
     while (true)
     {
         system("CLS");
-        error = true;
         drawStage();
-        cout << endl;
-        cout << "Attempts left: " << 10 - errorCount << endl;
-        if (!playerLetters.empty())
+        showAttempts();
+        showGuessed();
+        if (checkEnded())
         {
-            cout << "You guessed: ";
-            for (int i = 0; i < playerLetters.size(); i++)
-            {
-                cout << playerLetters[i] << (i == playerLetters.size() - 1 ? "" : ", ");
-            }
-            cout << endl;
-        }
-       
-        if (errorCount == 10)
-        {
-            char again;
-            cout << "\nYOU LOSE!\n";
-            cout << "The word was: " << word << endl;
-            cout << "Try again? [y/n]: ";
-            cin >> again;
-            if (again == 'y' || again == 'Y')
+            if (askAgain())
             {
                 prepare();
                 continue;
             }
-            return;
-        } 
-        if (guessed == word)
-        {
-            char again;
-            cout << endl << word << endl;
-            cout << "YOU WIN!\n";
-            cout << "Try again? [y/n]: ";
-            cin >> again;
-            if (again == 'y' || again == 'Y')
-            {
-                prepare();
-                continue;
-            }
-            return;
+            break;
         }
+        showGameWord();
+        inputPlayerGuess();
 
-        for (int i = 0; i < guessed.length(); i++)
-        {
-            cout << guessed[i] << " ";
-        }
-        cout << "\nGuess: ";
-        cin >> guess;
-
-        bool sameLetter = false;
-        for (int i = 0; i < playerLetters.size(); i++)
-        {
-            if (guess == playerLetters[i])
-            {
-                sameLetter = true;
-                break;
-            }
-        }
-        if (sameLetter)
+        if (checkSameLetter())
         {
             continue;
         }
-        for (int i = 0; i < guessed.length(); i++)
-        {
-            if (guess == word[i] || guess == word[i] - 32)
-            {
-                guessed[i] = word[i];
-                error = false;
-            }
-        }
-        if (error)
-        {
-            errorCount++;
-        }
-        playerLetters.push_back(guess);
+        checkCorrect();
     }
+}
+
+void Game::inputPlayerGuess()
+{
+    cout << "\nGuess: ";
+    cin >> guess;
 }
 
 void Game::prepare()
@@ -209,5 +160,88 @@ void Game::prepare()
         return;
     }
     errorCount = 0;
+}
+
+void Game::showAttempts()
+{
+    cout << "Attempts left: " << 10 - errorCount << endl;
+}
+
+void Game::showGuessed()
+{
+    if (!playerLetters.empty())
+    {
+        cout << "You guessed: ";
+        for (int i = 0; i < playerLetters.size(); i++)
+        {
+            cout << playerLetters[i] << (i == playerLetters.size() - 1 ? "" : ", ");
+        }
+        cout << endl;
+    }
+}
+
+bool Game::checkEnded()
+{
+    if (errorCount == 10)
+    {
+        cout << "\nYOU LOSE!\n";
+        cout << "The word was: " << word << endl;
+        return true;
+    }
+    if (guessed == word)
+    {
+        return true;
+    }
+    return false;
+}
+
+bool Game::checkSameLetter()
+{
+    for (int i = 0; i < playerLetters.size(); i++)
+    {
+        if (guess == playerLetters[i])
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+void Game::showGameWord()
+{
+    for (int i = 0; i < guessed.length(); i++)
+    {
+        cout << guessed[i] << " ";
+    }
+}
+
+bool Game::askAgain()
+{
+    char again;
+    cout << "Try again? [y/n]: ";
+    cin >> again;
+    if (again == 'y' || again == 'Y')
+    {
+        return true;
+    }
+    return false;
+}
+
+void Game::checkCorrect()
+{
+    bool error = true;
+    for (int i = 0; i < guessed.length(); i++)
+    {
+        if (guess == word[i] || guess == word[i] - 32)
+        {
+            guessed[i] = word[i];
+            error = false;
+        }
+    }
+    if (error)
+    {
+        errorCount++;
+    }
+    playerLetters.push_back(guess);
 }
 

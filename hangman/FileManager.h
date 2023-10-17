@@ -1,10 +1,10 @@
 #pragma once
 #include <iostream>
-class DataManager
+class FileManager
 {
 public:
 	int static getNumberOfWords();
 	std::string static getWord();
-	std::string static decipher(std::string, int key);
+	std::string static decrypt(std::string, int key);
 };
 

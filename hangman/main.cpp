@@ -3,5 +3,5 @@
 int main()
 {
 	Game game1;
-	game1.start();
+	game1.play();
 }

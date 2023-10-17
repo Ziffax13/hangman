@@ -127,13 +127,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DataManager.cpp" />
+    <ClCompile Include="FileManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DataManager.h" />
+    <ClInclude Include="FileManager.h" />
     <ClInclude Include="Game.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="words.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
