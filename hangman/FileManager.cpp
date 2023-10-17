@@ -17,7 +17,7 @@ int FileManager::getNumberOfWords()
 	return numberOfWords;
 }
 
-string FileManager::getWord()
+string FileManager::getRandomWord()
 {
 	{
 		string line;

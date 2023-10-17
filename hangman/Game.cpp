@@ -107,7 +107,7 @@ void Game::drawStage()
 
 void Game::chooseWord()
 {
-    word = FileManager::getWord();
+    word = FileManager::getRandomWord();
     guessed = word;
     for (int i = 0; i < word.length(); i++)
     {
@@ -144,12 +144,6 @@ void Game::play()
     }
 }
 
-void Game::inputPlayerGuess()
-{
-    cout << "\nGuess: ";
-    cin >> guess;
-}
-
 void Game::prepare()
 {
     playerLetters.clear();
@@ -160,6 +154,12 @@ void Game::prepare()
         return;
     }
     errorCount = 0;
+}
+
+void Game::inputPlayerGuess()
+{
+    cout << "\nGuess: ";
+    cin >> guess;
 }
 
 void Game::showAttempts()

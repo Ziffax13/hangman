@@ -11,10 +11,9 @@ class Game
     char guess;
     bool error;
 	std::string word;
-public:
+
 	void drawStage();
 	void chooseWord();
-	void play();
 	void inputPlayerGuess();
 	void prepare();
 	void showAttempts();
@@ -24,5 +23,8 @@ public:
 	void showGameWord();
 	bool askAgain();
 	void checkCorrect();
+	
+public:
+	void play();
 };
 

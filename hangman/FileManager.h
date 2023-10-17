@@ -4,7 +4,7 @@ class FileManager
 {
 public:
 	int static getNumberOfWords();
-	std::string static getWord();
+	std::string static getRandomWord();
 	std::string static decrypt(std::string, int key);
 };
 
